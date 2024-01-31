@@ -20,17 +20,30 @@
 </template>
 
 <script>
-// import axios from 'axios';
+import axios from 'axios';
 import NavigateBar from './components/navigateBar.vue';
 import SideNav from './components/SideNav.vue';
 
 import FourBox from './components/FourBox.vue';
 import BoxGrid from './components/BoxGrid.vue';
 import myFooter from './components/Footer.vue';
-import SlideImage from './components/SlideImage.vue'  
+import SlideImage from './components/SlideImage.vue'  ;
+
+import {mock} from 'mockjs';
+axios.defaults.baseURL="http://localhost:8080"
+// mock("http://localhost:8080/api/mock",{
+//   "code":0,
+//   "data":11111111,
+//   "msg":"success!"
+// })
 
 export default {
   name: 'App',
+  mounted (){
+    axios.get('/api/mock').then(result=>{
+      console.log(result.data);
+    })
+  },
   
   data() {
   return {

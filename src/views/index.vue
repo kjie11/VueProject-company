@@ -70,11 +70,25 @@ import FourBox from '../components/FourBox.vue';
 import BoxGrid from '../components/BoxGrid.vue';
 import myFooter from '../components/Footer.vue';
 import SlideImage from '../components/SlideImage.vue';
+import axios from 'axios';
+import {mock} from 'mockjs';
+axios.defaults.baseURL="http://localhost:8080"
+mock("http://localhost:8080/api/index",{
+  "code":0,
+  "data":11111111,
+  "msg":"this is index page!",
+  
+})
 
 
 
 export default {
   name: 'App',
+  mounted (){
+    axios.get('/api/index').then(result=>{
+      console.log(result.data);
+    })
+  },
 
   data() {
     return {

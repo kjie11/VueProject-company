@@ -4,7 +4,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 import App from './App.vue';
 import router from './router/index.js'
 import VueRouter from 'vue-router';
+import "../mock/index";
 
+require('../mock/page2');
 
 Vue.config.productionTip = false
 
