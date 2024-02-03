@@ -43,7 +43,7 @@
 
       </div>
 
-      <FourBox :src="src" :fourbox4="fourbox4" :fourbox1="fourbox1" :fourbox2="fourbox2" :fourbox3="fourbox3"
+      <FourBox  :fourbox4="fourbox4" :fourbox1="fourbox1" :fourbox2="fourbox2" :fourbox3="fourbox3"
         style=" "></FourBox>
 
           </div>
@@ -63,6 +63,7 @@
 </template>
   
 <script>
+import axios from 'axios';
 import NavigateBar from '../components/navigateBar.vue';
 import SideNav from '../components/SideNav.vue';
 
@@ -70,39 +71,44 @@ import FourBox from '../components/FourBox.vue';
 import BoxGrid from '../components/BoxGrid.vue';
 import myFooter from '../components/Footer.vue';
 import SlideImage from '../components/SlideImage.vue';
-import axios from 'axios';
+
 import {mock} from 'mockjs';
 axios.defaults.baseURL="http://localhost:8080"
-mock("http://localhost:8080/api/index",{
-  "code":0,
-  "data":11111111,
-  "msg":"this is index page!",
-  
-})
+
 
 
 
 export default {
   name: 'App',
-  mounted (){
-    axios.get('/api/index').then(result=>{
-      console.log(result.data);
+  mounted() {
+    
+    axios.get('/mock/index').then(res => { // url即在mock.js中定义的
+    
+    
+     this.slideImg=res.data.slideImg;
+      this.fourbox1=res.data.fourbox1;
+      this.fourbox2=res.data.fourbox2;
+      this.fourbox3=res.data.fourbox3;
+      this.fourbox4=res.data.fourbox4;
+    this.boxGridContent1=res.data.boxGridContent1;
+    this.sideNavTitles=res.data.sideNavTitles;
+    console.log("this is img",res.data)
     })
-  },
+     },
 
   data() {
     return {
       moreLink: 'https://your-target-link.com',
       footerText: 'hi this is footer',
-      src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-      slideImg: require('@/assets/slideImg.png'),
-      fourbox1: ['content1', 'content2', 'content3'],
-      fourbox1: [{ title: 'PHP岗位正在热聘中...', content: '公可待遇福利好，每年有一次旅游，提供住宿...', date: '2015-06-28' }, { title: 'PHP岗位正在热聘中...', content: '公可待遇福利好，每年有一次旅游，提供住宿...', date: '2015-06-28' }, { title: 'PHP岗位正在热聘中...', content: '公可待遇福利好，每年有一次旅游，提供住宿...', date: '2015-06-28' }],
-      fourbox4: { title: '环保部HCFC业务平台', content: '生态环境部贯彻落实党中央关于生态环境保护工作的方针政策和决策部界，在履行职责过程中坚持和加强党对生态环境保护工作的集中统一领导' },
-      boxGridContent1: [require('@/assets/logo1.png'), require('@/assets/logo2.png'), require('@/assets/logo3.png'), require('@/assets/logo4.png'), require('@/assets/logo5.png'), require('@/assets/logo6.png'), require('@/assets/logo7.png'), require('@/assets/logo8.png'),],
-      sideNavTitles: ['解决方案', '系列产品', '软件模块', '业务服务', '相关研究'],
-      fourbox2: require('@/assets/fourbox2.png'),
-      fourbox3: require('@/assets/fourbox3.png'),
+      slideImg:'',
+      // slideImg: require('@/assets/slideImg.png'),
+      
+      // fourbox1: [{ title: 'PHP岗位正在热聘中...', content: '公可待遇福利好，每年有一次旅游，提供住宿...', date: '2015-06-28' }, { title: 'PHP岗位正在热聘中...', content: '公可待遇福利好，每年有一次旅游，提供住宿...', date: '2015-06-28' }, { title: 'PHP岗位正在热聘中...', content: '公可待遇福利好，每年有一次旅游，提供住宿...', date: '2015-06-28' }],
+      // fourbox4: { title: '环保部HCFC业务平台', content: '生态环境部贯彻落实党中央关于生态环境保护工作的方针政策和决策部界，在履行职责过程中坚持和加强党对生态环境保护工作的集中统一领导' },
+      // boxGridContent1: [require('@/assets/logo1.png'), require('@/assets/logo2.png'), require('@/assets/logo3.png'), require('@/assets/logo4.png'), require('@/assets/logo5.png'), require('@/assets/logo6.png'), require('@/assets/logo7.png'), require('@/assets/logo8.png'),],
+      // sideNavTitles: ['解决方案', '系列产品', '软件模块', '业务服务', '相关研究'],
+      // fourbox2: require('@/assets/fourbox2.png'),
+      // fourbox3: require('@/assets/fourbox3.png'),
     };
   },
   components: {

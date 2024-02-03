@@ -103,9 +103,10 @@
 </style>
 
 <script>
+
   export default {
     props: [
-    'src',   
+       
     'fourbox1',
     'fourbox4',
     'fourbox2',

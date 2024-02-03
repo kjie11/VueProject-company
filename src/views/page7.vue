@@ -97,26 +97,42 @@
 
 </style>
 <script>
+import axios from 'axios';
 import TopPicture from '../components/TopPicture.vue';
 import NavigateBar from '../components/navigateBar.vue';
-
+axios.defaults.baseURL="http://localhost:8080"
   
   export default {
     name: 'App',
+    mounted() {
     
+    axios.get('/mock/joinUs').then(res => { // url即在mock.js中定义的
+    
+     this.img=res.data.img;
+     this.phoneLogo=res.data.phoneLogo;
+     this.emailLogo=res.data.emailLogo;
+     this.boxLeftContent=res.data.boxLeftContent;
+     this.boxRightContent=res.data.boxRightContent;
+     this.people=res.data.people;
+     this.tags=res.data.tags;
+    
+    console.log("this is img",res.data)
+    })
+     },
     data() {
     return {
-        img:require('@/assets/joinUs.png'),
+        //img:require('@/assets/joinUs.png'),
+        img:'',
       topPictureTitle:"人才招聘",
       topPictureTitleEN:"JOIN US",
-      phoneLogo:require('@/assets/phone.png'),
-      emailLogo:require('@/assets/email.png'),
+    //   phoneLogo:require('@/assets/phone.png'),
+    //   emailLogo:require('@/assets/email.png'),
       boxLeftTitle:'招聘联系电话',
       boxRightTitle:'简历投递邮箱',
-      boxLeftContent:[{title: '联系电话：',content:'01066897777'},{title:'联系人：',content:'陈女士'}],
-      boxRightContent:[{title:'人力资源部邮箱E-Mail:',content:'1160610077@qq.com'}],
-      people:[{job:'财务专员',pay:'6K-8K',detail:'西安/经验/3-5年/大专',date:'1天前发布'},{job:'UI设计师',pay:'6K-8K',detail:'西安/经验/3-5年/大专',date:'1天前发布'},{job:'WEB前端开发工程师',pay:'6K-8K',detail:'西安/经验/3-5年/大专',date:'1天前发布'},{job:'PHP开发工程师',pay:'6K-8K',detail:'西安/经验/3-5年/大专',date:'1天前发布'}],
-      tags:['定期体检','带薪年假','五险一金','周末双休'],
+    //   boxLeftContent:[{title: '联系电话：',content:'01066897777'},{title:'联系人：',content:'陈女士'}],
+    //   boxRightContent:[{title:'人力资源部邮箱E-Mail:',content:'1160610077@qq.com'}],
+    //   people:[{job:'财务专员',pay:'6K-8K',detail:'西安/经验/3-5年/大专',date:'1天前发布'},{job:'UI设计师',pay:'6K-8K',detail:'西安/经验/3-5年/大专',date:'1天前发布'},{job:'WEB前端开发工程师',pay:'6K-8K',detail:'西安/经验/3-5年/大专',date:'1天前发布'},{job:'PHP开发工程师',pay:'6K-8K',detail:'西安/经验/3-5年/大专',date:'1天前发布'}],
+    //   tags:['定期体检','带薪年假','五险一金','周末双休'],
       
     };
   },

@@ -31,11 +31,7 @@ import SlideImage from './components/SlideImage.vue'  ;
 
 import {mock} from 'mockjs';
 axios.defaults.baseURL="http://localhost:8080"
-// mock("http://localhost:8080/api/mock",{
-//   "code":0,
-//   "data":11111111,
-//   "msg":"success!"
-// })
+
 
 export default {
   name: 'App',

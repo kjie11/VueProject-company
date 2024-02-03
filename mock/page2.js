@@ -12,12 +12,11 @@ const page2 = function () {
     '3.操供统一而全面的数字内容营理平台，所有数字内容产品都可以拥有最新的信息技术功能，得到最全面的技术服务支持，并且对接册主流的数字产品发布平台《网站、苹果平白、安卓平台、微信公众号、H5、小程序等等)。',
     '4.充分发挥创受其现创总支现。',
   ];
-  const otherData = {
-    key1: 'value1',
-    key2: 'value2',
-    // Add more key-value pairs as needed
-  };
- return {textList,otherData}
+  
+  const img=require('@/assets/solution.png');
+  const solutionImg=require('@/assets/solutionImg.png');
+  choicesList=[{id:1,title:'数字出版'},{id:2,title:'数字教育'},{id:3,title:'识别图片'},{id:4,title:'数字资源管理'},{id:5,title:'政府信息化'},{id:6,title:'图书馆信息化'}];
+ return {textList,img,solutionImg,choicesList}
 }
 
 Mock.mock('http://localhost:8080/mock/solution', page2) 

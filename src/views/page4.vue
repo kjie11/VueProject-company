@@ -35,6 +35,7 @@
                 <el-col :span="8" v-for="(content, index) in showCaseBox " :key="content.id">
                     <div class="box">
                         <img :src="content.img" alt="" style="width: 100%; padding: 0px; margin: :0px;"/>
+                    <p>{{content.text}}</p>
                     </div>
 
 
@@ -134,20 +135,33 @@
 }
 </style>
 <script>
+import axios from 'axios';
 import TopPicture from '../components/TopPicture.vue';
 import NavigateBar from '../components/navigateBar.vue';
 import DropdownMenu from '../components/DropdownMenu.vue';
+axios.defaults.baseURL="http://localhost:8080"
 
 export default {
     name: 'App',
+    mounted() {
+    
+    axios.get('/mock/case').then(res => { // url即在mock.js中定义的
+    
+     this.img=res.data.img;
+     this.showCaseBox=res.data.showCaseBox
+    
+    console.log("this is img",res.data)
+    })
+     },
 
     data() {
         return {
-            img: require('@/assets/caseShow.png'),
+            img:'',
+            //img: require('@/assets/caseShow.png'),
             topPictureTitle: "案例展示",
             topPictureTitleEN: "CASE SHOW",
-            boxContents: ['box1', 'box2', 'box3', 'box4'],
-            showCaseBox: [{ id: 1, img: require('@/assets/showCase1.png'), text: '中办数字图书馆' }, { id: 2, img: require('@/assets/showCase1.png'), text: '中办数字图书馆' }, { id: 3, img: require('@/assets/showCase1.png'), text: '中办数字图书馆' }, { id: 4, img: require('@/assets/showCase1.png'), text: '中办数字图书馆' }, { id: 5, img: require('@/assets/showCase1.png'), text: '中办数字图书馆' }, { id: 6, img: require('@/assets/showCase1.png'), text: '中办数字图书馆' }]
+            
+            //showCaseBox: [{ id: 1, img: require('@/assets/showCase1.png'), text: '中办数字图书馆' }, { id: 2, img: require('@/assets/showCase1.png'), text: '中办数字图书馆' }, { id: 3, img: require('@/assets/showCase1.png'), text: '中办数字图书馆' }, { id: 4, img: require('@/assets/showCase1.png'), text: '中办数字图书馆' }, { id: 5, img: require('@/assets/showCase1.png'), text: '中办数字图书馆' }, { id: 6, img: require('@/assets/showCase1.png'), text: '中办数字图书馆' }]
 
         };
     },

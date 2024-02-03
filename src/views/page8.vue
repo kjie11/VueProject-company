@@ -81,22 +81,37 @@
     
 </style>
 <script>
+import axios from 'axios';
 import TopPicture from '../components/TopPicture.vue';
 import NavigateBar from '../components/navigateBar.vue';
-
+axios.defaults.baseURL="http://localhost:8080"
   
   export default {
     name: 'App',
+    mounted() {
+    
+    axios.get('/mock/aboutUs').then(res => { // url即在mock.js中定义的
+    
+     this.img=res.data.img;
+     
+     this.companyImg=res.data.companyImg
+     this.text=res.data.text
+     this.page8imgs=res.data.page8imgs
+     this.page8Address=res.data.page8Address
+    console.log("this is img",res.data)
+    })
+     },
     
     data() {
     return {
-        img:require('@/assets/aboutUs.png'),
-        companyImg:require('@/assets/company.png'),
+        //img:require('@/assets/aboutUs.png'),
+        img:'',
+        // companyImg:require('@/assets/company.png'),
       topPictureTitle:"关于我们",
       topPictureTitleEN:"ABOUT Us",
-      text:['我公司由多位归国留学人员发起创立。致力于数字出版解决方案，BPM信息流程管理解决方案，移动APP开发解决方案，独立开发编辑器，拥有自己的运行环境、虚拟机、动画引擎、脚本引擎。独立研发自由知识产权跨平台虚拟机和程序脚本。公司励志做出世界级的软件产品，让国产软件走向世界!我们有着最优秀的研发经验，市场影响力，产品开发能力，主要客户为出版传媒领域，电子杂志，广告设计，教育培训机构等','企业文化，或称组织文化(Corporate Culture或Organizational Culture)，是一个组织由其价值观信念、仪式、符号、处事方式等组成的其特有的文化形象，简单而言，就是企业在日常运行中所表现出的各方各面。','企业文化，或称组织文化(Corporate Culture或Organizational Culture)，是一个组织由其价值观信念、仪式、符号、处事方式等组成的其特有的文化形象，简单而言，就是企业在日常运行中所表现出的各方各面。'],
-      page8imgs:[require('@/assets/page8img1.png'),require('@/assets/page8img2.png'),require('@/assets/page8img3.png'),require('@/assets/page8img4.png')],
-      page8Address:require('@/assets/page8Address.png'),
+    //   text:['我公司由多位归国留学人员发起创立。致力于数字出版解决方案，BPM信息流程管理解决方案，移动APP开发解决方案，独立开发编辑器，拥有自己的运行环境、虚拟机、动画引擎、脚本引擎。独立研发自由知识产权跨平台虚拟机和程序脚本。公司励志做出世界级的软件产品，让国产软件走向世界!我们有着最优秀的研发经验，市场影响力，产品开发能力，主要客户为出版传媒领域，电子杂志，广告设计，教育培训机构等','企业文化，或称组织文化(Corporate Culture或Organizational Culture)，是一个组织由其价值观信念、仪式、符号、处事方式等组成的其特有的文化形象，简单而言，就是企业在日常运行中所表现出的各方各面。','企业文化，或称组织文化(Corporate Culture或Organizational Culture)，是一个组织由其价值观信念、仪式、符号、处事方式等组成的其特有的文化形象，简单而言，就是企业在日常运行中所表现出的各方各面。'],
+    //   page8imgs:[require('@/assets/page8img1.png'),require('@/assets/page8img2.png'),require('@/assets/page8img3.png'),require('@/assets/page8img4.png')],
+    //   page8Address:require('@/assets/page8Address.png'),
     };
   },
   components:{
@@ -106,10 +121,7 @@ import NavigateBar from '../components/navigateBar.vue';
       TopPicture,
     
     },
-    mounted() {
-       
-          
-  },
+   
     methods :{
         
 

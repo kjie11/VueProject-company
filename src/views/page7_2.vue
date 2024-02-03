@@ -73,29 +73,31 @@
 }
 </style>
 <script>
+import axios from 'axios';
 import TopPicture from '../components/TopPicture.vue';
 import NavigateBar from '../components/navigateBar.vue';
-
+axios.defaults.baseURL="http://localhost:8080"
 
 export default {
     name: 'App',
 
     data() {
         return {
-            img: require('@/assets/joinUs.png'),
+            //img: require('@/assets/joinUs.png'),
+            img:'',
             topPictureTitle: "人才招聘",
             topPictureTitleEN: "JOIN US",
             currentPath: '当前位置：首页 > 人才招聘 > 详情',
-            job: 'UI设计师',
-            pay: '6k-8k',
-            experience: '经验3-5年 / 大专',
-            tags: ['五险一金', '定期体检', '扁平化管理', '午餐补助', '福利多'],
-            jobDetails: '',
-            jobRequirement: '',
-            name: '陈女士',
-            phone: '010-66897777',
-            address: '北京市海淀区上地信息路12号A206',
-            otherJobs: [{ title: '财务专员', pay: '6k-8k', experience: '经验1-3年', background: '本科', date: '1' }, { title: 'WEB前端开发工程师', pay: '6k-8k', experience: '经验1-3年', background: '本科', date: '1' }, { title: 'PHP开发工程师', pay: '6k-8k', experience: '经验1-3年', background: '本科', date: '1' }],
+            // job: 'UI设计师',
+            // pay: '6k-8k',
+            // experience: '经验3-5年 / 大专',
+            // tags: ['五险一金', '定期体检', '扁平化管理', '午餐补助', '福利多'],
+            // jobDetails: '',
+            // jobRequirement: '',
+            // name: '陈女士',
+            // phone: '010-66897777',
+            // address: '北京市海淀区上地信息路12号A206',
+            // otherJobs: [{ title: '财务专员', pay: '6k-8k', experience: '经验1-3年', background: '本科', date: '1' }, { title: 'WEB前端开发工程师', pay: '6k-8k', experience: '经验1-3年', background: '本科', date: '1' }, { title: 'PHP开发工程师', pay: '6k-8k', experience: '经验1-3年', background: '本科', date: '1' }],
 
         };
     },
@@ -107,9 +109,26 @@ export default {
 
     },
     mounted() {
-
-        this.jobDetails = this.readFile('static/jobDetails.txt')
-        this.jobRequirement = this.readFile('static/jobRequirement.txt')
+        console.log("starting")
+        // this.jobDetails = this.readFile('static/jobDetails.txt')
+        // this.jobRequirement = this.readFile('static/jobRequirement.txt')
+        axios.get('/mock/joinUsDetail').then(res => { // url即在mock.js中定义的
+    
+    this.img=res.data.img;
+    
+    this.jobDetails=res.data.details
+    this.jobRequirement=res.data.requirement
+    this.job=res.data.job
+    this.pay=res.data.pay
+    this.experience=res.data.experience
+    this.tags=res.data.tags
+    this.name=res.data.name
+    this.phone=res.data.phone
+    this.address=res.data.address
+    this.otherJobs=res.data.otherJobs
+   console.log("this is img",res.data)
+   })
+        
 
     },
     methods: {

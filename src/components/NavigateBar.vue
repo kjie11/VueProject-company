@@ -32,12 +32,25 @@
 </template>
 
 <script>
+import axios from 'axios';
+axios.defaults.baseURL="http://localhost:8080"
 export default {
+  mounted() {
+    
+    axios.get('/mock/apiMock').then(res => { // url即在mock.js中定义的
+     this.companyLogo=res.data.companyLogo;
+     console.log("here is api mock",res.data)
+    
+    
+    
+    })
+     },
   data() {
     return {
       activeIndex: '1',
       isHovered: false,
-      companyLogo: require('@/assets/companyLogo.png'),
+      companyLogo:'',
+      // companyLogo: require('@/assets/companyLogo.png'),
     };
   },
   methods: {
